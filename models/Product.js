@@ -23,7 +23,9 @@ product_name:{
 price:{
 type: DataTypes.DECIMAL,
 allowNull: false,
-isDecimal: true,
+validate: {
+  isDecimal: true
+},
 },
 stock:{
 type: DataTypes.INTEGER,
@@ -33,8 +35,11 @@ isNumeric: true,
 },
 category_id:{
   type: DataTypes.INTEGER,
-  module: category,
-  key:  'id',
+  references: {
+    module: 'category',
+    key:  'id',
+  }
+  
 },
 },
 {
