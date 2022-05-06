@@ -34,11 +34,46 @@ router.get("/:id", (req, res) => {
 
 router.post("/", (req, res) => {
   // create a new category
+  Category.findAll({
+    attributes: ["id", "product_name", "price", "stock", "category_id"],
+  
+  })
+    .then(dbPostData => res.json(dbPostData))
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
+
+
+
+
 router.put("/:id", (req, res) => {
-  // update a category by its `id` value
+// update a category by its `id` value
+Category.update({
+           id: req.body.id,
+category_name: req.body.category_name,
+},
+{
+// Gets a book based on the book_id given in the request parameters
+where: {
+  category_id: req.params.category_id,
+},
+}
+)
+.then((updatedCategory) => {
+res.json(updatedCategory);
+})
+.catch((err) => {
+console.log(err);
+res.json(err);
 });
+
+});
+
+
+
 
 router.delete("/:id", (req, res) => {
   // delete a category by its `id` value
@@ -47,8 +82,8 @@ router.delete("/:id", (req, res) => {
       id: req.params.id,
     },
   })
-    .then((deletedBook) => {
-      res.json(deletedBook);
+    .then((deletedCategory) => {
+      res.json(deletedCategory);
     })
     .catch((err) => res.json(err));
 });
