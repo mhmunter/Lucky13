@@ -34,9 +34,12 @@ router.get("/:id", (req, res) => {
 
 router.post("/", (req, res) => {
   // create a new category
-  Category.findAll({
-    attributes: ["id", "product_name", "price", "stock", "category_id"],
-  
+  Category.create({
+    id: req.body.id,
+    product_name: req.body.product_name,
+    price: req.body.price,
+    stock: req.body.stock,
+    category_id: req.body.category_id,
   })
     .then(dbPostData => res.json(dbPostData))
     .catch(err => {
