@@ -6,51 +6,62 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 // get all products
 router.get('/', (req, res) => {
   Product.findAll({
-    
-      include: [
-        {
+      include: [{
           model: Category,
-          attributes: ["id", "category_name"],
-        },
-        {
-          model: Tag,
-          attributes: ["id", "tag_name"],
+         // attributes: ["id", "category_name"],
+      
+         model: Tag,
+         // attributes: ["id", "tag_name"],
           through: ProductTag,
         },
-      ],
-    })
-      .then((data) => res.json(data))
-      .catch((err) => {
-        console.log(err);
-        res.status(500).json(err);
-      });
+        ],
+      })
+      .then((foundCategory) => {
+        if (!foundCategory) {
+          res.status(404).json({ message: "No category found with this id" });
+          return;
+        }
+        res.json(foundCategory);
+      })
+      .catch((err) => res.json(err));
   });
   
 
 // get one product
 router.get('/:id', (req, res) => {
+  // find a single product by its `id`
+  // be sure to include its associated Category and Tag data
   Product.findOne({
     where: {
-      id: req.params.id,
+      id: req.params.id
     },
-  include: [
-    {
-      model: Category,
-      attributes: ["category_name"],
-    },
-    {
-      model: Tag,
-      //attributes: ["id", "tag_name"],
-      through: ProductTag,
-    },
-  ],
+    include: [
+      {
+        model: Category,
+        include: {
+          model: Tag,
+          attributes: ['id','tag_name'],
+          through: ProductTag,
+        }
+      },
+  
+    ]
+  
+})
+.then((data) => res.json(data))
 
-  .then((data) => res.json(data))
-  .catch((err) => {
-    console.log(err);
-    res.status(500).json(err);
-  })
-});
+.catch(err => {
+  console.log(err);
+  res.status(500).json(err);
+  });
+});  
+  
+  
+
+
+
+
+
 
 
 // create new product

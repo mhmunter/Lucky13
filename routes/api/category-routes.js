@@ -69,7 +69,7 @@ router.delete("/:id", (req, res) => {
   // delete a category by its `id` value
   Category.destroy({
     where: {
-      category_name: req.params.category_name,
+      id: req.params.id,
     },
   })
     .then((deletedCategory) => {
@@ -119,29 +119,6 @@ router.get("/:id", (req, res) => {
 
 
 
-// module.exports = router;
-// const { response } = require("express");
-// const { Category, Product } = require("../../models");
-
-    
-
-
-// router.get("/:id", (req, res) => {
-//   // find one category by its `id` value
-//   // be sure to include its associated Products
-//   Category.findOne({
-//     where: {
-//       id: req.params.id,
-//     },
-//     include: [Product],
-//   })
-//     .then((category) => {
-//       res.json(category);
-//     })
-//     .catch((error) => {
-//       res.status(500).json(error);
-//     });
-// });
 
 
 
