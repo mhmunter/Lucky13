@@ -3,7 +3,7 @@ const { response } = require("express");
 const { Category, Product } = require("../../models");
 
 // // The `/api/categories` endpoint
-
+//find all category function
 router.get("/", (req, res) => {
   Category.findAll({
     include: [{
@@ -16,6 +16,9 @@ router.get("/", (req, res) => {
   res.json(err);
 })
 });
+
+//alternative find by just id once user has been established
+
 // router.get("/:id", (req, res) => {
 //   Category.findByPk(req.params.id)
 //     .then(function (data) {
@@ -28,6 +31,8 @@ router.get("/", (req, res) => {
 //   // be sure to include its associated Products
 // });
 
+
+//creates new category 
 router.post("/", (req, res) => {
   // create a new category
   Category.create({
@@ -41,7 +46,7 @@ router.post("/", (req, res) => {
 });
 
 
-
+//changes an already exsisting category
 router.put("/:id", (req, res) => {
 // update a category by its `id` value
 Category.update(req.body,{
@@ -64,7 +69,7 @@ res.json(err);
 });
 
 
-
+//deletes a cartegory
 router.delete("/:id", (req, res) => {
   // delete a category by its `id` value
   Category.destroy({
@@ -82,26 +87,10 @@ router.delete("/:id", (req, res) => {
     .catch((err) => res.json(err));
 });
 
-// router.get("/", (req, res) => {
-//   Category.findAll()
-//     .then(function (data) {
-//       res.json(data);
-//     })
-//     .catch(function (err) {
-//       res.json(err);
-//     });
-//   // find all categories
-//   // be sure to include its associated Products
-// });
 
 
-
-
-
-
+// finds one category by its `id` value
 router.get("/:id", (req, res) => {
-  // find one category by its `id` value
-  // be sure to include its associated Products
   Category.findOne({
     where: {
       id: req.params.id,
