@@ -145,12 +145,12 @@ router.delete("/:id", (req, res) => {
       id: req.params.id,
     },
   })
-    .then((deletedCategory) => {
-      if (!deletedCategory) {
+    .then((deletedproduct) => {
+      if (!deletedproduct) {
         res.status(404).json({ message: "No category found with this id" });
         return;
       }
-      res.json(deletedCategory);
+      res.json(deletedproduct);
     })
     .catch((err) => res.json(err));
 });
