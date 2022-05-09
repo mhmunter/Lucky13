@@ -26,7 +26,7 @@
  </ol>
  
  ## **Link**
-[watch install video](chrome-extension://mmeijimgabbpbgpdklnllpncmdofkcpn/app.html#/files/6607a5cc-7aec-43f5-y240-85a90c2aaab6)
+[watch install video](https://drive.google.com/file/d/1_Gf8S4X82unKmCMGe5UHQyypAkUkMSoX/view)
 
 ## **Questions:**
 mhmunter@yahoo.com
