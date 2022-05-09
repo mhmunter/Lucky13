@@ -16,12 +16,12 @@ router.get('/', (req, res) => {
         },
         ],
       })
-      .then((foundCategory) => {
-        if (!foundCategory) {
+      .then((data) => {
+        if (!data) {
           res.status(404).json({ message: "No category found with this id" });
           return;
         }
-        res.json(foundCategory);
+        res.json(data);
       })
       .catch((err) => res.json(err));
   });
@@ -40,7 +40,6 @@ router.get('/:id', (req, res) => {
         model: Category,
         include: {
           model: Tag,
-          attributes: ['id','tag_name'],
           through: ProductTag,
         }
       },
